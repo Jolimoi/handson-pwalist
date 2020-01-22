@@ -19,6 +19,12 @@ export default {
   methods: {
     logout() {
       // Exercice 2.3
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$router.replace("login");
+        });
     }
   }
 };

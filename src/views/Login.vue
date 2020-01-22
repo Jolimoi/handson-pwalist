@@ -28,6 +28,17 @@ export default {
   methods: {
     login() {
       // Exercice 2.2
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.email, this.password)
+        .then(
+          () => {
+            this.$router.replace("home");
+          },
+          err => {
+            alert("Login" + err.message);
+          }
+        );
     }
   }
 };

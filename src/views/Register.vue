@@ -26,6 +26,17 @@ export default {
   methods: {
     signUp() {
       // Exercice 2.1
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(this.email, this.password)
+        .then(
+          () => {
+            this.$router.replace("home");
+          },
+          err => {
+            alert("Login Error" + err.message);
+          }
+        );
     }
   }
 };

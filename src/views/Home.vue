@@ -1,18 +1,25 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
+    <img alt="Vue logo" src="../assets/logo.png" />
     <Form />
+    <button @click="logout">Logout</button>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Form from '@/components/Form.vue'
+import Form from "@/components/Form.vue";
+import firebase from 'firebase'
 
 export default {
-  name: 'home',
+  name: "home",
   components: {
     Form
+  },
+  methods: {
+    logout() {
+      // Exercice 2.3
+    }
   }
-}
+};
 </script>

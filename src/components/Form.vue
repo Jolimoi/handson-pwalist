@@ -15,20 +15,47 @@
 <script>
 import firebase from "firebase";
 
+
 export default {
   name: "Form",
   data() {
     return {
       ingredient: "",
       docs: []
-    }
+    };
   },
   mounted() {
     // Exercice 1.2
+    firebase
+      .firestore()
+      .collection("maliste")
+      .onSnapshot(querySnapshot => {
+        querySnapshot.docChanges().forEach(change => {
+          if (change.type === "added") {
+            this.docs.push({
+              id: change.doc.id,
+              name: change.doc.data().name
+            });
+          }
+        });
+      });
+      // Exercice 2.4
+      firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        // Exercice 2.4
+      }
+    });
   },
   methods: {
     onSubmit: function() {
       // Exercice 1.1
+      firebase
+        .firestore()
+        .collection("maliste")
+        .add({
+          name: this.ingredient
+        });
+        // Exercice 2.4
     }
   }
 };

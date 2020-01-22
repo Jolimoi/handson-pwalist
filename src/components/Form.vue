@@ -25,10 +25,25 @@ export default {
   },
   mounted() {
     // Exercice 1.2
+    firebase
+      .firestore()
+      .collection("maliste")
+      .get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          this.docs.push(doc.data());
+        });
+      });
   },
   methods: {
     onSubmit: function() {
       // Exercice 1.1
+      firebase
+        .firestore()
+        .collection("maliste")
+        .add({
+          name: this.ingredient
+        });
     }
   }
 };

@@ -21,17 +21,21 @@ export default {
     return {
       ingredient: "",
       docs: []
-    }
+    };
   },
   mounted() {
     // Exercice 1.2
     firebase
       .firestore()
       .collection("maliste")
-      .get()
-      .then(snapshot => {
-        snapshot.forEach(doc => {
-          this.docs.push(doc.data());
+      .onSnapshot(querySnapshot => {
+        querySnapshot.docChanges().forEach(change => {
+          if (change.type === "added") {
+            this.docs.push({
+              id: change.doc.id,
+              name: change.doc.data().name
+            });
+          }
         });
       });
   },
